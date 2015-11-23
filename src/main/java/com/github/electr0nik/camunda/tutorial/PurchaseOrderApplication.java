@@ -3,8 +3,8 @@ package com.github.electr0nik.camunda.tutorial;
 import org.camunda.bpm.application.ProcessApplication;
 import org.camunda.bpm.application.impl.ServletProcessApplication;
 
-@ProcessApplication("Loan Approval App")
-public class LoanApprovalApplication extends ServletProcessApplication {
+@ProcessApplication("Purchase Order App")
+public class PurchaseOrderApplication extends ServletProcessApplication {
   // empty implementation
 
 }
