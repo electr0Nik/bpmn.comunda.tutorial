@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.electr0nik</groupId>
   <artifactId>camunda.tutorial.extended</artifactId>
@@ -51,7 +50,7 @@
         <type>pom</type>
       </dependency>
 
-      <!-- custom  -->
+      <!-- custom -->
       <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>jcl-over-slf4j</artifactId>
@@ -139,7 +138,7 @@
         <version>2.6</version>
         <configuration>
           <failOnMissingWebXml>false</failOnMissingWebXml>
-          <!--<outputDirectory>/home/Schreibtisch/dev/tools/server/camunda-bpm-tomcat-7.3.0/server/apache-tomcat-7.0.62/webapps/</outputDirectory>-->
+          <!--<outputDirectory>/home/Schreibtisch/dev/tools/server/camunda-bpm-tomcat-7.3.0/server/apache-tomcat-7.0.62/webapps/</outputDirectory> -->
         </configuration>
       </plugin>
     </plugins>
@@ -151,7 +150,7 @@
       <build>
         <finalName>${final.name}</finalName>
         <plugins>
-          <!-- copy war on 'install' phase-->
+          <!-- copy war on 'install' phase -->
           <plugin>
             <artifactId>maven-resources-plugin</artifactId>
             <executions>
@@ -193,7 +192,43 @@
       <id>dev_jo_vm_windows</id>
       <build>
         <plugins>
-          <!-- copy war on 'install' phase-->
+          <!-- copy war on 'install' phase -->
+          <plugin>
+            <artifactId>maven-resources-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>copy-resource-one</id>
+                <phase>install</phase>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <configuration>
+                  <!-- override existing war -->
+                  <overwrite>true</overwrite>
+                  <!-- set output folder -->
+                  <outputDirectory>C:\Users\ADMIN\camunda-bpm-tomcat-7.3.0\server\apache-tomcat-7.0.62\webapps\</outputDirectory>
+                  <!-- define what should be copied -->
+                  <resources>
+                    <resource>
+                      <directory>${basedir}/target/</directory>
+                      <includes>
+                        <include>*.war</include>
+                      </includes>
+                    </resource>
+                  </resources>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>dev_nik_vm_windows</id>
+      <build>
+        <finalName>${final.name}</finalName>
+        <plugins>
+          <!-- copy war on 'install' phase -->
           <plugin>
             <artifactId>maven-resources-plugin</artifactId>
             <executions>
