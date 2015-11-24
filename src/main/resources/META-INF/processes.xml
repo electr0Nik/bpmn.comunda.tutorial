@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<process-application xmlns="http://www.camunda.org/schema/1.0/ProcessApplication">
+<process-application
+    xmlns="http://www.camunda.org/schema/1.0/ProcessApplication"
+>
 
-  <process-archive name="purchase-order">
+  <process-archive name="Einkauf Service">
     <process-engine>default</process-engine>
     <properties>
       <property name="isDeleteUponUndeploy">false</property>
