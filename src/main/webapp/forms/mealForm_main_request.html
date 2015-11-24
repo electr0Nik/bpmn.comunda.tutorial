@@ -1,0 +1,88 @@
+<form name="customerForm" role="form">
+
+  <script cam-script type="text/form-script">
+
+    // angular form works on scope object
+    var mealForm = $scope.mealForm = {
+      mealList : []
+    };
+
+    // scope function which adds a new address
+    $scope.addMeal = function() {
+      customerData.mealList.push({});
+    };
+
+    /**
+     * cam form lifecycle hooks
+    */
+    camForm.on('form-loaded', function() {
+
+      // declare variable 'customerData' incuding metadata for serialization
+      camForm.variableManager.createVariable({
+        name: 'mealForm',
+        type: 'Object',
+        value: mealForm,
+        valueInfo: {
+          // indicate that object is serialized as json
+          serializationDataFormat: 'application/json',
+          // provide classname of java object
+          objectTypeName: 'com.github.electr0nik.camunda.purchaseorder.form.MealForm'
+        }
+      });
+
+    });
+
+    camForm.on('submit', function() {
+      // remove '$$hashKey' properties from meal objects
+      angular.forEach(mealData.mealList, function(meal) {
+        delete meal.$$hashKey;
+      });
+    });
+
+  </script>
+
+  <h3>Meals</h3>
+
+  <div>
+    <h3>Meals and Ingredients</h3>
+    <a href ng-click="addMeal()" class="btn btn-default">Add</a>
+
+    <div ng-repeat="meal in mealForm.mealList">
+      <hr>
+      <div class="control-group">
+        <label class="control-label" for="mealName">Name</label>
+
+        <div class="controls">
+          <input id="mealName" class="form-control" type="text" required ng-model="meal.name">
+        </div>
+      </div>
+
+      <div ng-repeat="ingredient in meal.ingredientList">
+        <div class="control-group">
+          <label class="control-label" for="ingredientName">Ingredient Name</label>
+
+          <div class="controls">
+            <input id="ingredientName" class="form-control" type="text" required ng-model="ingredient.name">
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="ingredientAmount">Ingredient amount</label>
+
+          <div class="controls">
+            <input id="ingredientAmount" class="form-control" type="text" required ng-model="ingredient.amount">
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="ingredientPrice">Ingredient price</label>
+
+          <div class="controls">
+            <input id="ingredientPrice" class="form-control" type="text" required ng-model="ingredient.priceInCent">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</form>
