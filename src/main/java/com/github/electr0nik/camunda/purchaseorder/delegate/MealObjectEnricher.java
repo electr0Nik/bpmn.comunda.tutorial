@@ -36,8 +36,7 @@ public class MealObjectEnricher implements JavaDelegate {
       try {
         tmpAmount = Long.parseLong(it.getAmount());
       } catch (NumberFormatException nfe) {
-        nfe.printStackTrace();
-        LOGGER.error(nfe.getMessage(), nfe);
+        LOGGER.warn(nfe.getMessage(), nfe);
         tmpAmount = 1L;
       }
       it.setPriceInCent(tmpAmount * tmpValue + (((tmpAmount * tmpValue) * DEFAULT_EXTRA_CHARGE) / 100));
@@ -53,11 +52,7 @@ public class MealObjectEnricher implements JavaDelegate {
     try {
       properties.load(input);
     } catch (IOException e) {
-      e.printStackTrace();
       LOGGER.error("catch: " + e.getMessage(), e);
     }
-    properties.stringPropertyNames().forEach(propName -> {
-      LOGGER.info(String.format("set properties: \nkey: %s \tvalue: %s ", propName, properties.getProperty(propName)));
-    });
   }
 }
