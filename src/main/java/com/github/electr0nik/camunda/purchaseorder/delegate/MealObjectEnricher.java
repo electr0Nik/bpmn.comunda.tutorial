@@ -4,7 +4,6 @@ import com.github.electr0nik.camunda.purchaseorder.model.Meal;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -20,7 +19,7 @@ public class MealObjectEnricher implements JavaDelegate {
   private final static Properties properties = new Properties();
 
   private final static String DEFAULT_PROPERTY_NAME_PREFIX = "default.price.";
-  private final static String DEFAULT_PROPERTY_SOURCE = "mock_ingredientsPrice.properties";
+  private final static String DEFAULT_PROPERTY_SOURCE = "Web-INF/mock_ingredientsPrice.properties";
   private final static String DEFAULT_VALUE = "599";
   private final static Long DEFAULT_EXTRA_CHARGE = 5L;
 
@@ -47,7 +46,8 @@ public class MealObjectEnricher implements JavaDelegate {
   }
 
   private void populatedProperties(final String propertySource) throws IOException {
-    final InputStream input = new FileInputStream(propertySource);
+    // get resource from classpath.. we need this in web-environment
+    final InputStream input = this.getClass().getClassLoader().getResourceAsStream(DEFAULT_PROPERTY_SOURCE);
     // load a properties file
     properties.load(input);
     properties.stringPropertyNames().forEach(propName -> {
