@@ -3,7 +3,9 @@
   <script cam-script type="text/form-script">
 
     // angular form works on scope object
-    var mealForm = $scope.mealForm = {};
+    var mealForm = $scope.mealForm = {
+      mealList : []
+    };
 
     // scope function which adds a new ingredients
     $scope.addMeal = function() {
@@ -49,6 +51,12 @@
           <input id="mealName" class="form-control" type="text" required ng-model="meal.name">
         </div>
       </div>
+    </div>
+    <div class="form-group">
+      <label for="isApproved">Loan Approved?</label>
+      <select cam-variable-name="isApproved" cam-variable-type="Boolean">
+        <option value="false">Not Approved</option>
+      </select>
     </div>
   </div>
 </form>

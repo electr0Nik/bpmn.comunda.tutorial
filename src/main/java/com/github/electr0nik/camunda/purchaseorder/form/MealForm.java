@@ -11,12 +11,7 @@ import java.util.List;
 public class MealForm {
   private List<Meal> mealList;
 
-  public MealForm() {
-    this.mealList = new ArrayList<>();
-    for (int i = 0; i < 10; i++) {
-      this.mealList.add(new Meal());
-    }
-  }
+  
 
   public List<Meal> getMealList() {
     return mealList;
