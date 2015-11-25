@@ -7,7 +7,7 @@
     <bpmn2:startEvent id="StartEvent_1" camunda:formKey="embedded:app:forms/mealForm_main_request.html" name="determinate demand by creating an meal list">
       <bpmn2:outgoing>SequenceFlow_1</bpmn2:outgoing>
     </bpmn2:startEvent>
-    <bpmn2:serviceTask id="UserTask_1" camunda:class="com.github.electr0nik.camunda.purchaseorder.delegate.PurchaseOrderJavaDelegate" name="delegate">
+    <bpmn2:serviceTask id="UserTask_1" camunda:class="com.github.electr0nik.camunda.purchaseorder.delegate.MealObjectEnricher" name="enricher">
       <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
     </bpmn2:serviceTask>

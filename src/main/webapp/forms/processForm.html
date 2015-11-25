@@ -1,7 +1,6 @@
-<form name="manualRating" role="form">
+<form name="meal" role="form">
 
   <script cam-script type="text/form-script">
-
     camForm.on('form-loaded', function() {
       // fetch the variable named 'meal'
       camForm.variableManager.fetchVariable('meal');
@@ -19,18 +18,19 @@
         delete ingredient.$$hashKey;
       });
     });
-
   </script>
 
-  <p class="lead">display ingredients</p>
+  <p class="lead">Please provide a rating for the following customer</p>
 
   <strong>{{meal.name}}</strong><br>
-  <div ng-repeat="ingredient in meal.ingredientList">
+
+  <div ng-repeat="ingredient in customerData.addresses">
     <div>
-      {{ingredient.name}}<br> 
-      {{ingredient.amount}}<br> 
+      {{ingredient.name}}<br>
+      {{ingredient.amount}}<br>
       {{ingredient.priceInCent}}
     </div>
+    <br>
   </div>
   <br>
 </form>
