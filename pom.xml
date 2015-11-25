@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.electr0nik</groupId>
   <artifactId>camunda.tutorial.extended</artifactId>
-  <version>1.0.6-SNAPSHOT</version>
+  <version>1.0.7-SNAPSHOT</version>
   <packaging>war</packaging>
   <description>Example - Online Purchase Process</description>
 
