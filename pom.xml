@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.electr0nik</groupId>
   <artifactId>camunda.tutorial.extended</artifactId>
-  <version>1.0.7-SNAPSHOT</version>
+  <version>1.0.8-SNAPSHOT</version>
   <packaging>war</packaging>
   <description>Example - Online Purchase Process</description>
 
@@ -116,6 +116,14 @@
       <artifactId>javax.servlet-api</artifactId>
       <version>3.1.0</version>
       <scope>provided</scope>
+    </dependency>
+
+    <!-- guava for convenience -->
+    <!-- do not use RC in prd -->
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>19.0-rc2</version>
     </dependency>
   </dependencies>
 
