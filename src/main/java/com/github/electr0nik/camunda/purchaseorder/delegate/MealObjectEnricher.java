@@ -19,7 +19,7 @@ public class MealObjectEnricher implements JavaDelegate {
   private final static Properties properties = new Properties();
 
   private final static String DEFAULT_PROPERTY_NAME_PREFIX = "default.price.";
-  private final static String DEFAULT_PROPERTY_SOURCE = "Web-INF/mock_ingredientsPrice.properties";
+  private final static String DEFAULT_PROPERTY_SOURCE = "mock_ingredientsPrice.properties";
   private final static String DEFAULT_VALUE = "599";
   private final static Long DEFAULT_EXTRA_CHARGE = 5L;
 
@@ -36,6 +36,7 @@ public class MealObjectEnricher implements JavaDelegate {
       try {
         tmpAmount = Long.parseLong(it.getAmount());
       } catch (NumberFormatException nfe) {
+        nfe.printStackTrace();
         LOGGER.error(nfe.getMessage(), nfe);
         tmpAmount = 1L;
       }
@@ -48,15 +49,20 @@ public class MealObjectEnricher implements JavaDelegate {
   private void populatedProperties(final String propertySource) {
     LOGGER.info("Begin populatedProperties!");
     // get resource from classpath.. we need this in web-environment
+    LOGGER.info("check source: \n\rpropertySource: " + propertySource + "\n\rgetClass: " + this.getClass() + " \n\rclassloader:"
+        + this.getClass().getClassLoader() + " \n\rresource as stream: " + this.getClass().getClassLoader().getResourceAsStream(propertySource));
     final InputStream input = this.getClass().getClassLoader().getResourceAsStream(propertySource);
     // load a properties file
     try {
       properties.load(input);
     } catch (IOException e) {
-      LOGGER.error(e.getMessage(), e);
+      e.printStackTrace();
+      LOGGER.error("catch: " + e.getMessage(), e);
     }
     properties.stringPropertyNames().forEach(propName -> {
       LOGGER.info(String.format("set properties: \nkey: %s \tvalue: %s ", propName, properties.getProperty(propName)));
     });
+
+    LOGGER.info("End populatedProperties!");
   }
 }

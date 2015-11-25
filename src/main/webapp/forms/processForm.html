@@ -1,4 +1,4 @@
-<form name="meal" role="form">
+<form name="mealForm" role="form">
 
   <script cam-script type="text/form-script">
     camForm.on('form-loaded', function() {
@@ -20,11 +20,11 @@
     });
   </script>
 
-  <p class="lead">Please provide a rating for the following customer</p>
+  <p class="lead">Please check your Order</p>
 
   <strong>{{meal.name}}</strong><br>
 
-  <div ng-repeat="ingredient in customerData.addresses">
+  <div ng-repeat="ingredient in meal.ingredientList">
     <div>
       {{ingredient.name}}<br>
       {{ingredient.amount}}<br>
