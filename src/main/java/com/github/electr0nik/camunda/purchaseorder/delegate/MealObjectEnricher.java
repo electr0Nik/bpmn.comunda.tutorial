@@ -46,7 +46,7 @@ public class MealObjectEnricher implements JavaDelegate {
   }
 
   private void populatedProperties(final String propertySource) {
-    // get resource from classpath.. we need this in web-environment
+    // get resource from classpath... we need this in web-environment
     final InputStream input = this.getClass().getClassLoader().getResourceAsStream(propertySource);
     // load a properties file
     try {

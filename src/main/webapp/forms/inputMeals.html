@@ -1,0 +1,54 @@
+<form name="customForm" role="form">
+
+  <script cam-script type="text/form-script">
+
+    // angular form works on scope object
+    var mealForm = $scope.mealForm = {};
+
+    // scope function which adds a new ingredients
+    $scope.addMeal = function() {
+      mealForm.mealList.push({});
+    };
+
+    camForm.on('form-loaded', function() {
+      // declare variable 'meal' incuding metadata for serialization
+      camForm.variableManager.createVariable({
+        name: 'mealForm',
+        type: 'Object',
+        value: mealForm,
+        valueInfo: {
+          // indicate that object is serialized as json
+          serializationDataFormat: 'application/json',
+          // provide classname of java object
+          objectTypeName: 'com.github.electr0nik.camunda.purchaseorder.form.MealForm'
+        }
+      });
+    });
+
+    camForm.on('submit', function() {
+      // remove '$$hashKey' properties from ingredient objects
+      angular.forEach(mealForm.mealList, function(meal) {
+        delete meal.$$hashKey;
+      });
+    });
+
+  </script>
+
+  <h3>MealList</h3>
+
+  <div>
+    <h3>Meal</h3>
+    <a href ng-click="addMeal()" class="btn btn-default">Add</a>
+
+    <div ng-repeat="meal in mealForm.mealList">
+      <hr>
+      <div class="control-group">
+        <label class="control-label" for="mealName">Meal name</label>
+
+        <div class="controls">
+          <input id="mealName" class="form-control" type="text" required ng-model="meal.name">
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
