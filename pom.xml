@@ -51,7 +51,7 @@
         <type>pom</type>
       </dependency>
 
-      <!-- custom - - >
+      <!-- custom -->
       <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>jcl-over-slf4j</artifactId>
@@ -77,7 +77,6 @@
         <artifactId>logback-core</artifactId>
         <version>${logback.version}</version>
       </dependency>
-      -->
     </dependencies>
   </dependencyManagement>
 
@@ -91,7 +90,7 @@
 
     <!-- logging -->
     <!-- logging framework -->
-    <!-- use logback instead jul/apache.logger/log4j - - >
+    <!-- use logback instead jul/apache.logger/log4j -->
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>jcl-over-slf4j</artifactId>
@@ -104,7 +103,6 @@
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
     </dependency>
-    -->
 
     <!-- provided by tomcat -->
     <dependency>
