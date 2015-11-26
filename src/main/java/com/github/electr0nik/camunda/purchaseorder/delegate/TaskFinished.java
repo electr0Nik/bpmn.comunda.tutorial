@@ -13,7 +13,7 @@ public class TaskFinished implements JavaDelegate {
   public void execute(DelegateExecution execution) throws Exception {
     LOGGER.info("Begin TaskFinished!");
 
-    LOGGER.info("Task Finished!\n vars used: ");
+    LOGGER.info("Task Finished!\n vars used: " + execution.getVariableNames());
     execution.getVariables().forEach((key, value) -> LOGGER.info("key: " + key + "\t value: " + value));
 
     LOGGER.info("End TaskFinished!");

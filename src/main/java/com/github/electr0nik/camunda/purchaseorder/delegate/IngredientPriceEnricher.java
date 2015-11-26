@@ -6,13 +6,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.github.electr0nik.camunda.purchaseorder.delegate.form.MealForm;
-import com.github.electr0nik.camunda.purchaseorder.delegate.model.Meal;
 import com.github.electr0nik.camunda.purchaseorder.service.PropertyLoader;
 import com.github.electr0nik.camunda.purchaseorder.service.impl.PropertyLoaderImpl;
 
-/**
- * Created by nik on 24.11.15.
- */
+
 public class IngredientPriceEnricher implements JavaDelegate {
 
   private final Logger LOGGER = LoggerFactory.getLogger(IngredientPriceEnricher.class);
@@ -28,10 +25,11 @@ public class IngredientPriceEnricher implements JavaDelegate {
   @Override
   public void execute(DelegateExecution execution) throws Exception {
     LOGGER.info("Begin IngredientPriceEnricher enrichment!");
-    LOGGER.info("test: " + execution + " : " +execution.getVariableNames());
-    
+    LOGGER.info("test: " + execution + " : " + execution.getVariableNames());
+
     MealForm mealForm = (MealForm) execution.getVariable("mealForm");
-    
+
+    final long[] fullprice = {0};
     mealForm.getMealList().forEach(
         meal -> meal.getIngredientList().forEach(
             it -> {
@@ -45,9 +43,10 @@ public class IngredientPriceEnricher implements JavaDelegate {
                 tmpAmount = 1L;
               }
               it.setPriceInCent(tmpAmount * tmpValue + (((tmpAmount * tmpValue) * DEFAULT_EXTRA_CHARGE) / 100));
+              fullprice[0] += it.getPriceInCent();
             }));
 
-    execution.setVariable("fullPrice", "over 9000");
+    execution.setVariable("fullPrice", fullprice[0]);
 
     LOGGER.info("end enrichment!");
   }

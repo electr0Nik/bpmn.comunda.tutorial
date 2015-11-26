@@ -1,30 +1,36 @@
-<form role="form">
+<form name="customForm" role="form">
 
   <script cam-script type="text/form-script">
     camForm.on('form-loaded', function() {
       // fetch the variable named 'fullPrice'
       camForm.variableManager.fetchVariable('fullPrice');
-      camForm.variableManager.fetchVariable('fullPrice');
+      // fetch the variable named 'mealForm'
+      camForm.variableManager.fetchVariable('mealForm');
     });
 
     camForm.on('variables-fetched', function() {
       // after the variables are fetched, bind the value of mealForm to a angular
       // scope value such that the form can work on it
       $scope.fullPrice = camForm.variableManager.variable('fullPrice').value;
-      $scope.meal = camForm.variableManager.variable('meal').value;
+      // after the variables are fetched, bind the value of mealForm to a angular
+      // scope value such that the form can work on it
+      $scope.mealForm = camForm.variableManager.variable('mealForm').value;
     });
 
   </script>
   <div>
     <h3>Order Overview</h3>
 
-    <div ng-repeat="ingredient in meal.ingredientList">
-      <div>
-        {{ingredient.name}}<br> {{ingredient.amount}}<br>
+    <div ng-repeat="meal in mealForm.mealList">
+      <div ng-repeat="ingredient in meal.ingredientList">
+        <div>
+          name: {{ingredient.name}}<br> 
+          amount: {{ingredient.amount}}<br> 
+          price: {{ingredient.priceInCent}}<br>
+        </div>
+        <br>
       </div>
-      <br>
     </div>
-
     <strong>{{fullPrice}}</strong><br>
 
     <div class="form-group">

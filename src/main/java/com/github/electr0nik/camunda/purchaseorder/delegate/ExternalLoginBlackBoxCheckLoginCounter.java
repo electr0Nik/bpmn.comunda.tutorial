@@ -7,9 +7,6 @@ import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * Created by nik on 26.11.15.
- */
 public class ExternalLoginBlackBoxCheckLoginCounter implements JavaDelegate {
 
   private final Logger LOGGER = LoggerFactory.getLogger(IngredientPriceEnricher.class);
@@ -22,15 +19,15 @@ public class ExternalLoginBlackBoxCheckLoginCounter implements JavaDelegate {
 
   @Override
   public void execute(DelegateExecution execution) throws Exception {
-    LOGGER.info("Begin Login!");
+    LOGGER.info("Begin ExternalLoginBlackBoxCheckLoginCounter!");
 
-    execution.getVariables().forEach((key, value) -> LOGGER.info("key: " + key + "\t value: " + value));
+    execution.getVariables().forEach((key, value) -> LOGGER.info("ExternalLoginBlackBoxCheckLoginCounter\nkey: " + key + "\t value: " + value));
     final Long loginCounter = execution.getVariable("loginCounter") != null ? (long) execution.getVariable("loginCounter") : 1;
 
     execution.setVariable("isLoginSuccess", false);
     execution.setVariable("loginCounter", loginCounter + 1);
 
-    LOGGER.info("end Login!");
+    LOGGER.info("end ExternalLoginBlackBoxCheckLoginCounter!");
   }
 
 }

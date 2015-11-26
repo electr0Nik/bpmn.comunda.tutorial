@@ -26,10 +26,12 @@ public class MealFormEnricher implements JavaDelegate {
 
   @Override
   public void execute(DelegateExecution execution) throws Exception {
-    LOGGER.info("Begin enrichment!");
+    LOGGER.info("Begin MealFormEnricher!");
     MealForm mealForm = (MealForm) execution.getVariable("mealForm");
+    
+    LOGGER.info("Begin ingredient list population!");
     mealForm.getMealList().forEach(meal ->
         meal.setIngredientList(this.helperService.populateMealIngredients(this.propertyLoader.getPopulatedProperties(DEFAULT_PROPERTY_SOURCE), meal.getName())));
-    LOGGER.info("end enrichment!");
+    LOGGER.info("End MealFormEnricher!");
   }
 }
