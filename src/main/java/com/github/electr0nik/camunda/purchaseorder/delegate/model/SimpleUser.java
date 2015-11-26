@@ -59,4 +59,14 @@ public class SimpleUser {
   public void setGender(String gender) {
     this.gender = gender;
   }
+
+  @Override
+  public String toString() {
+    return "SimpleUser{" +
+        "email='" + email + '\'' +
+        ", firstName='" + firstName + '\'' +
+        ", lastName='" + lastName + '\'' +
+        ", gender='" + gender + '\'' +
+        '}';
+  }
 }

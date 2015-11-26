@@ -40,4 +40,14 @@ public class Ingredient {
   public void setAtHome(Boolean atHome) {
     isAtHome = atHome;
   }
+
+  @Override
+  public String toString() {
+    return "Ingredient{" +
+        "name='" + name + '\'' +
+        ", amount='" + amount + '\'' +
+        ", priceInCent=" + priceInCent +
+        ", isAtHome=" + isAtHome +
+        '}';
+  }
 }

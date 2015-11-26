@@ -23,4 +23,12 @@ public class Meal {
   public void setIngredientList(List<Ingredient> ingredientList) {
     this.ingredientList = ingredientList;
   }
+
+  @Override
+  public String toString() {
+    return "Meal{" +
+        "name='" + name + '\'' +
+        ", ingredientList=" + ingredientList.stream().toString() +
+        '}';
+  }
 }

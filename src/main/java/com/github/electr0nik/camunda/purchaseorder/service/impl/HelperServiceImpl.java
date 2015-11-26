@@ -1,10 +1,17 @@
 package com.github.electr0nik.camunda.purchaseorder.service.impl;
 
+import com.github.electr0nik.camunda.purchaseorder.delegate.form.MealForm;
 import com.github.electr0nik.camunda.purchaseorder.delegate.model.Ingredient;
 import com.github.electr0nik.camunda.purchaseorder.delegate.model.SimpleUser;
 import com.github.electr0nik.camunda.purchaseorder.service.HelperService;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -57,5 +64,18 @@ public class HelperServiceImpl implements HelperService {
     user.setGender("Male");
     user.setLastName("Matrix");
     return user;
+  }
+
+  @Override
+  public void persistOrder(final MealForm mealForm, final SimpleUser user) {
+    final String fileName = "order" + new Date().getTime() + ".txt";
+    final Path path = Paths.get("C:\\work\\orders\\" + fileName);
+    try {
+      final BufferedWriter writer = Files.newBufferedWriter(path);
+      writer.write(mealForm.toString() + "\n\n" + user.toString());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
   }
 }

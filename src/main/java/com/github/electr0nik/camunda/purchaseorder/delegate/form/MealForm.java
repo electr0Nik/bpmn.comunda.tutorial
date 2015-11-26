@@ -14,4 +14,11 @@ public class MealForm {
   public void setMealList(List<Meal> mealList) {
     this.mealList = mealList;
   }
+
+  @Override
+  public String toString() {
+    return "MealForm{" +
+        "mealList=" + mealList.stream().toString() +
+        '}';
+  }
 }
