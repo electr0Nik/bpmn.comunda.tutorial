@@ -1,0 +1,48 @@
+<form name="customForm" role="form">
+
+  <script cam-script type="text/form-script">
+    camForm.on('form-loaded', function() {
+      // fetch the variable named 'meal'
+      camForm.variableManager.fetchVariable('meal');
+    });
+
+    camForm.on('variables-fetched', function() {
+      // after the variables are fetched, bind the value of meal to a angular
+      // scope value such that the form can work on it
+      $scope.meal = camForm.variableManager.variable('meal').value;
+    });
+
+    camForm.on('submit', function() {
+      // remove '$$hashKey' properties from meal objects
+      angular.forEach(meal.ingredientList, function(ing) {
+        delete ing.$$hashKey;
+      });
+    });
+
+  </script>
+
+  <p class="lead">Please check your MealList</p>
+
+  <div ng-repeat="meal in mealForm.mealList">
+
+    <strong>{{meal.name}}</strong><br>
+
+    <div ng-repeat="ingredient in meal.ingredientList">
+      <div>
+        {{ingredient.name}}<br> 
+        {{ingredient.amount}}<br>
+      </div>
+      <br>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Please choose</label> 
+    <select cam-variable-name="buyIngredients" cam-variable-type="String">
+      <option value="cancel">Cancel order</option>
+      <option value="choose">Choose ingredients</option>
+      <option value="all">Buy all - continue with Order Overview</option>
+    </select>
+  </div>
+
+</form>
