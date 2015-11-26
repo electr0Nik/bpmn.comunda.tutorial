@@ -1,8 +1,5 @@
 package com.github.electr0nik.camunda.purchaseorder.delegate.model;
 
-/**
- * Created by nik on 24.11.15.
- */
 public class Ingredient {
 
   private String name;

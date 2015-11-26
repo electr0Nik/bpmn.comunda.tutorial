@@ -8,9 +8,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-/**
- * Created by nik on 25.11.15.
- */
 // @Service
 public class PropertyLoaderImpl implements PropertyLoader {
 

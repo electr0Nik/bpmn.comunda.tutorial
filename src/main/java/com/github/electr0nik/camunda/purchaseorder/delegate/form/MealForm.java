@@ -1,12 +1,9 @@
 package com.github.electr0nik.camunda.purchaseorder.delegate.form;
 
-import java.util.List;
-
 import com.github.electr0nik.camunda.purchaseorder.delegate.model.Meal;
 
-/**
- * Created by nik on 25.11.15.
- */
+import java.util.List;
+
 public class MealForm {
   private List<Meal> mealList;
 

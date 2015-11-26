@@ -21,11 +21,10 @@ public class ExternalLoginBlackBoxCheckLoginCounter implements JavaDelegate {
   public void execute(DelegateExecution execution) throws Exception {
     LOGGER.info("Begin ExternalLoginBlackBoxCheckLoginCounter!");
 
-    execution.getVariables().forEach((key, value) -> LOGGER.info("ExternalLoginBlackBoxCheckLoginCounter\nkey: " + key + "\t value: " + value));
-    final Long loginCounter = execution.getVariable("loginCounter") != null ? (long) execution.getVariable("loginCounter") : 1;
+    final Long loginCounter = execution.getVariable("loginCounter") != null ? (long) execution.getVariable("loginCounter") : 2;
 
     execution.setVariable("isLoginSuccess", false);
-    execution.setVariable("loginCounter", loginCounter + 1);
+    execution.setVariable("loginCounter", loginCounter);
 
     LOGGER.info("end ExternalLoginBlackBoxCheckLoginCounter!");
   }

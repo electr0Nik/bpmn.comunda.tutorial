@@ -10,9 +10,6 @@ import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * Created by nik on 24.11.15.
- */
 public class MealFormEnricher implements JavaDelegate {
 
   private final Logger LOGGER = LoggerFactory.getLogger(MealFormEnricher.class);

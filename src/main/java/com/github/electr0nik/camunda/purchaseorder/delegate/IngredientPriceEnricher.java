@@ -1,14 +1,12 @@
 package com.github.electr0nik.camunda.purchaseorder.delegate;
 
+import com.github.electr0nik.camunda.purchaseorder.delegate.form.MealForm;
+import com.github.electr0nik.camunda.purchaseorder.service.PropertyLoader;
+import com.github.electr0nik.camunda.purchaseorder.service.impl.PropertyLoaderImpl;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.github.electr0nik.camunda.purchaseorder.delegate.form.MealForm;
-import com.github.electr0nik.camunda.purchaseorder.service.PropertyLoader;
-import com.github.electr0nik.camunda.purchaseorder.service.impl.PropertyLoaderImpl;
-
 
 public class IngredientPriceEnricher implements JavaDelegate {
 
@@ -25,11 +23,10 @@ public class IngredientPriceEnricher implements JavaDelegate {
   @Override
   public void execute(DelegateExecution execution) throws Exception {
     LOGGER.info("Begin IngredientPriceEnricher enrichment!");
-    LOGGER.info("test: " + execution + " : " + execution.getVariableNames());
 
     MealForm mealForm = (MealForm) execution.getVariable("mealForm");
 
-    final long[] fullprice = {0};
+    final long[] fullPrice = {0};
     mealForm.getMealList().forEach(
         meal -> meal.getIngredientList().forEach(
             it -> {
@@ -43,10 +40,10 @@ public class IngredientPriceEnricher implements JavaDelegate {
                 tmpAmount = 1L;
               }
               it.setPriceInCent(tmpAmount * tmpValue + (((tmpAmount * tmpValue) * DEFAULT_EXTRA_CHARGE) / 100));
-              fullprice[0] += it.getPriceInCent();
+              fullPrice[0] += it.getPriceInCent();
             }));
 
-    execution.setVariable("fullPrice", fullprice[0]);
+    execution.setVariable("fullPrice", fullPrice[0]);
 
     LOGGER.info("end enrichment!");
   }

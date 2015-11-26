@@ -2,9 +2,6 @@ package com.github.electr0nik.camunda.purchaseorder.delegate.model;
 
 import java.util.List;
 
-/**
- * Created by nik on 24.11.15.
- */
 public class Meal {
 
   private String name;

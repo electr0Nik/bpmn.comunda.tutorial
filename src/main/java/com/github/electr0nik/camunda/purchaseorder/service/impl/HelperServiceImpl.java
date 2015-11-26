@@ -1,15 +1,13 @@
 package com.github.electr0nik.camunda.purchaseorder.service.impl;
 
 import com.github.electr0nik.camunda.purchaseorder.delegate.model.Ingredient;
+import com.github.electr0nik.camunda.purchaseorder.delegate.model.SimpleUser;
 import com.github.electr0nik.camunda.purchaseorder.service.HelperService;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-/**
- * Created by nik on 26.11.15.
- */
 public class HelperServiceImpl implements HelperService {
   private final String DEFAULT_PROPERTY_MEAL_OBJECT_PREFIX = "object.Meal.";
 
@@ -41,5 +39,23 @@ public class HelperServiceImpl implements HelperService {
           }
         });
     return ingredientList;
+  }
+
+  /**
+   * i am just to lazy to create another smoke properties, therefore, just create a simple user object and return it
+   *
+   * @param username
+   * @param decodedPassword
+   * @return
+   */
+  @Override
+  public SimpleUser getPopulatedSimpleSimpleUser(final String username, final String decodedPassword) {
+    // return this.repository.load(username, decodedPassword);
+    final SimpleUser user = new SimpleUser();
+    user.setEmail("test@test.de");
+    user.setFirstName("Rambo");
+    user.setGender("Male");
+    user.setLastName("Matrix");
+    return user;
   }
 }

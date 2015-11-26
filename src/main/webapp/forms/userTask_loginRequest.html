@@ -1,9 +1,49 @@
-<form name="UserForm">
-  <div class="form-group">
-    <label for="usernamel">Username</label> <input class="form-control" cam-variable-type="String" cam-variable-name="username" name="username" />
+<form name="customerForm" role="form">
+
+  <script cam-script type="text/form-script">
+    // angular for empty object
+    var simpleUser = $scope.simpleUser = {};
+
+    camForm.on('form-loaded', function() {
+      // fetch the variable named 'loginCounter'
+      camForm.variableManager.fetchVariable('loginCounter');
+
+      // declare variable 'customerData' incuding metadata for serialization
+      camForm.variableManager.createVariable({
+        name: 'simpleUser',
+        type: 'Object',
+        value: simpleUser,
+        valueInfo: {
+          // indicate that object is serialized as json
+          serializationDataFormat: 'application/json',
+          // provide classname of java object
+          objectTypeName: 'com.github.electr0nik.camunda.purchaseorder.delegate.model.SimpleUser'
+        }
+      });
+    });
+
+    camForm.on('variables-fetched', function() {
+      // after the variables are fetched, bind the value of mealForm to a angular
+      // scope value such that the form can work on it
+      $scope.loginCounter = camForm.variableManager.variable('loginCounter').value;
+    });
+  </script>
+
+  <h3>Please Login</h3>
+
+  <div class="control-group">
+    <label class="control-label" for="username">Username</label>
+
+    <div class="controls">
+      <input id="username" class="form-control" type="text" required ng-model="simpleUser.username">
+    </div>
   </div>
-  <div class="form-group">
-    <label for="Passwort">Passwort</label> <input type="password" form-control" cam-variable-type="String" cam-variable-name="Passwort"
-      name="Passwort" readonly="true" />
+
+  <div class="control-group">
+    <label class="control-label" for="password">Password</label>
+
+    <div class="controls">
+      <input id="password" class="form-control" type="password" required ng-model="simpleUser.password">
+    </div>
   </div>
 </form>

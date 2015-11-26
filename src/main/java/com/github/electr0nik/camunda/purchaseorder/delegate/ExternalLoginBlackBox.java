@@ -1,5 +1,6 @@
 package com.github.electr0nik.camunda.purchaseorder.delegate;
 
+import com.github.electr0nik.camunda.purchaseorder.delegate.model.SimpleUser;
 import com.github.electr0nik.camunda.purchaseorder.service.PropertyLoader;
 import com.github.electr0nik.camunda.purchaseorder.service.impl.PropertyLoaderImpl;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
@@ -20,14 +21,25 @@ public class ExternalLoginBlackBox implements JavaDelegate {
   @Override
   public void execute(DelegateExecution execution) throws Exception {
     LOGGER.info("Begin ExternalLoginBlackBox!");
+
+    SimpleUser user = (SimpleUser) execution.getVariable("simpleUser");
+
     final String expectedUsername = this.propertyLoader.getPopulatedProperties(DEFAULT_PROPERTY_SOURCE).getProperty(DEFAULT_PROPERTY_CREDENTIALS_PREFIX + "username");
     final String password = this.propertyLoader.getPopulatedProperties(DEFAULT_PROPERTY_SOURCE).getProperty(DEFAULT_PROPERTY_CREDENTIALS_PREFIX + "password");
 
-    execution.getVariables().forEach((key, value) -> LOGGER.info("ExternalLoginBlackBox\nkey: " + key + "\t value: " + value));
-    final Long loginCounter = execution.getVariable("loginCounter") != null ? (long) execution.getVariable("loginCounter") : 0;
+    final Boolean isLoginSuccess;
+    final Long loginFailCounter;
+    if (user.getUserName().equals(expectedUsername) &&
+        user.getPassword().equals(password)) {
+      isLoginSuccess = true;
+      loginFailCounter = 0L;
+    } else {
+      isLoginSuccess = false;
+      loginFailCounter = execution.getVariable("loginCounter") != null ? (long) execution.getVariable("loginCounter") : 1L;
+    }
 
-    execution.setVariable("isLoginSuccess", false);
-    execution.setVariable("loginCounter", loginCounter + 1);
+    execution.setVariable("isLoginSuccess", isLoginSuccess);
+    execution.setVariable("loginCounter", loginFailCounter);
 
     LOGGER.info("end ExternalLoginBlackBox!");
   }
