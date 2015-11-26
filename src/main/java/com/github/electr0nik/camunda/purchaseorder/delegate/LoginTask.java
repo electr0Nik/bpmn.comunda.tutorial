@@ -8,9 +8,9 @@ import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ExternalLoginBlackBox implements JavaDelegate {
+public class LoginTask implements JavaDelegate {
 
-  private final Logger LOGGER = LoggerFactory.getLogger(IngredientPriceEnricher.class);
+  private final Logger LOGGER = LoggerFactory.getLogger(LoginTask.class);
 
   private final String DEFAULT_PROPERTY_SOURCE = "db/smoke/mock_usercredentials.properties";
   private final String DEFAULT_PROPERTY_CREDENTIALS_PREFIX = "user.credentials.";
