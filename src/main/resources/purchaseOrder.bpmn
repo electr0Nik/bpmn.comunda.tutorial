@@ -41,7 +41,7 @@
     </bpmn2:serviceTask>
     <bpmn2:sequenceFlow id="SequenceFlow_15" name="" sourceRef="StartEvent_1" targetRef="ServiceTask_4"/>
     <bpmn2:sequenceFlow id="SequenceFlow_16" name="" sourceRef="ServiceTask_4" targetRef="UserTask_3"/>
-    <bpmn2:userTask id="UserTask_4" camunda:assignee="john" camunda:formKey="embedded:app:forms/userTask_orderOverview.html" name="order &#xA;overview">
+    <bpmn2:userTask id="UserTask_4" camunda:assignee="john" camunda:formKey="embedded:app:forms/userTask_orderOverview.html" name="order &#xD;&#xA;overview">
       <bpmn2:incoming>SequenceFlow_17</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_18</bpmn2:outgoing>
     </bpmn2:userTask>
@@ -87,7 +87,7 @@
     <bpmn2:sequenceFlow id="SequenceFlow_11" name="too many attemps" sourceRef="ExclusiveGateway_3" targetRef="EndEvent_3">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{loginCounter>3}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:sequenceFlow id="SequenceFlow_12" name="" sourceRef="ExclusiveGateway_3" targetRef="ServiceTask_2">
+    <bpmn2:sequenceFlow id="SequenceFlow_12" name="ok" sourceRef="ExclusiveGateway_3" targetRef="ServiceTask_2">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression"><![CDATA[#{loginCounter<4}]]></bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="SequenceFlow_13" name="" sourceRef="UserTask_2" targetRef="EndEvent_1"/>
@@ -186,7 +186,7 @@
       <bpmndi:BPMNShape id="_BPMNShape_EndEvent_7" bpmnElement="EndEvent_2">
         <dc:Bounds height="36.0" width="36.0" x="924.0" y="82.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="22.0" width="87.0" x="899.0" y="123.0"/>
+          <dc:Bounds height="22.0" width="86.0" x="899.0" y="123.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_9" bpmnElement="ServiceTask_5">

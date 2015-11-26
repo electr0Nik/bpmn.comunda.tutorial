@@ -13,9 +13,12 @@
     });
 
     camForm.on('submit', function() {
-      // remove '$$hashKey' properties from ingredient objects
+      // remove '$$hashKey' properties from meal objects
       angular.forEach($scope.mealForm.mealList, function(meal) {
         delete meal.$$hashKey;
+        angular.forEach(meal.ingredientList, function(ing) {
+          delete ing.$$hashKey;
+        });
       });
     });
 
@@ -36,7 +39,7 @@
       <div class="control-group">
         <label class="control-label" for="hasIngredientsAtHome">Get this ingredients?</label>
         <div class="controls">
-          <input id="hasIngredientsAtHome" type="checkbox" required ng-model="ingredient.isAtHome">
+          <input id="hasIngredientsAtHome" type="checkbox" ng-model="ingredient.isAtHome">
         </div>
         <br>
       </div>

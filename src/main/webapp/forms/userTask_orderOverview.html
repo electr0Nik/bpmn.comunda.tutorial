@@ -1,13 +1,28 @@
-<div>
-  <h3>Items to buy?</h3>
-  <strong>{{fullPrice}}</strong><br>
+<form role="form">
 
-  <div class="form-group">
-    <label>Loan Approved?</label>
-    <select cam-variable-name="isApproved" cam-variable-type="Boolean">
-      <option value="-1">please select one!</option>
-      <option value="true">Continue with order</option>
-      <option value="false">Cancel</option>
-    </select>
+  <script cam-script type="text/form-script">
+    camForm.on('form-loaded', function() {
+      // fetch the variable named 'fullPrice'
+      camForm.variableManager.fetchVariable('fullPrice');
+    });
+
+    camForm.on('variables-fetched', function() {
+      // after the variables are fetched, bind the value of mealForm to a angular
+      // scope value such that the form can work on it
+      $scope.fullPrice = camForm.variableManager.variable('fullPrice').value;
+    });
+
+  </script>
+  <div>
+    <h3>Items to buy?</h3>
+    <strong>{{fullPrice}}</strong><br>
+
+    <div class="form-group">
+      <label>Loan Approved?</label> <select cam-variable-name="isApproved" cam-variable-type="Boolean">
+        <option value="-1">please select one!</option>
+        <option value="true">Continue with order</option>
+        <option value="false">Cancel</option>
+      </select>
+    </div>
   </div>
-</div>
+</form>

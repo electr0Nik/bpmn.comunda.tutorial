@@ -1,6 +1,5 @@
 package com.github.electr0nik.camunda.purchaseorder.delegate.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,8 +9,7 @@ public class Meal {
 
   private String name;
 
-  private List<Ingredient> ingredientList = new ArrayList<>();
-
+  private List<Ingredient> ingredientList;
 
   public String getName() {
     return name;
