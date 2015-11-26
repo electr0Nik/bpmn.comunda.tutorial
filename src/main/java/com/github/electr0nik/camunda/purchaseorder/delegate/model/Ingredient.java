@@ -1,4 +1,4 @@
-package com.github.electr0nik.camunda.purchaseorder.model;
+package com.github.electr0nik.camunda.purchaseorder.delegate.model;
 
 /**
  * Created by nik on 24.11.15.
@@ -8,6 +8,9 @@ public class Ingredient {
   private String name;
   private String amount;
   private Long priceInCent;
+
+  private Boolean isAtHome = true;
+
 
   public String getName() {
     return name;
@@ -31,5 +34,13 @@ public class Ingredient {
 
   public void setPriceInCent(Long priceInCent) {
     this.priceInCent = priceInCent;
+  }
+
+  public Boolean getAtHome() {
+    return isAtHome;
+  }
+
+  public void setAtHome(Boolean atHome) {
+    isAtHome = atHome;
   }
 }

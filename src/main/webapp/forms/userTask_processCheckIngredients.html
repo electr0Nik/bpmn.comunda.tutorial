@@ -1,0 +1,46 @@
+<form name="customForm" role="form">
+
+  <script cam-script type="text/form-script">
+    camForm.on('form-loaded', function() {
+      // fetch the variable named 'mealForm'
+      camForm.variableManager.fetchVariable('mealForm');
+    });
+
+    camForm.on('variables-fetched', function() {
+      // after the variables are fetched, bind the value of mealForm to a angular
+      // scope value such that the form can work on it
+      $scope.mealForm = camForm.variableManager.variable('mealForm').value;
+    });
+
+    camForm.on('submit', function() {
+      // remove '$$hashKey' properties from ingredient objects
+      angular.forEach($scope.mealForm.mealList, function(meal) {
+        delete meal.$$hashKey;
+      });
+    });
+
+  </script>
+
+  <p class="lead">Please check your MealList</p>
+
+  <div ng-repeat="meal in mealForm.mealList">
+
+    <strong>{{meal.name}}</strong><br>
+
+    <div ng-repeat="ingredient in meal.ingredientList">
+      <div>
+        {{ingredient.name}}<br>
+        {{ingredient.amount}}<br>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="hasIngredientsAtHome">Get this ingredients?</label>
+        <div class="controls">
+          <input id="hasIngredientsAtHome" type="checkbox" required ng-model="ingredient.isAtHome">
+        </div>
+        <br>
+      </div>
+      <br>
+    </div>
+  </div>
+</form>

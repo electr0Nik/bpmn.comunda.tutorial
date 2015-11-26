@@ -1,0 +1,69 @@
+<form name="customForm" role="form">
+
+  <script cam-script type="text/form-script">
+
+    // angular form works on scope object
+    var mealForm = $scope.mealForm = {
+    mealList : []
+    };
+
+    // scope function which adds a new ingredients
+    $scope.addMeal = function() {
+    mealForm.mealList.push({});
+    };
+
+    camForm.on('form-loaded', function() {
+    // declare variable 'meal' incuding metadata for serialization
+    camForm.variableManager.createVariable({
+    name: 'mealForm',
+    type: 'Object',
+    value: mealForm,
+    valueInfo: {
+    // indicate that object is serialized as json
+    serializationDataFormat: 'application/json',
+    // provide classname of java object
+    objectTypeName: 'com.github.electr0nik.camunda.purchaseorder.delegate.form.MealForm'
+    }
+    });
+    });
+
+    camForm.on('submit', function() {
+    // remove '$$hashKey' properties from ingredient objects
+    angular.forEach(mealForm.mealList, function(meal) {
+    delete meal.$$hashKey;
+    });
+    });
+
+
+  </script>
+
+  <h3>MealList</h3>
+
+  <p>Please select meals</p>
+
+  <div>
+    <a href ng-click="addMeal()" class="btn btn-default">Add</a>
+
+    <div ng-repeat="meal in mealForm.mealList">
+      <hr>
+      <div class="control-group">
+        <label class="control-label" for="mealName">Meal name</label>
+
+        <div class="controls">
+          <select id="mealName" class="form-control" required ng-model="meal.name">
+            <option>SchniPo</option>
+            <option>Maultaschen</option>
+            <option>EisDessert</option>
+            <option>Kartoffelbrei</option>
+            <option>Tomatennudeln</option>
+            <option>Paprikanudeln</option>
+            <option>Yoghurt</option>
+            <option>Brustfilet</option>
+            <option>Steak</option>
+            <option>Eier</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

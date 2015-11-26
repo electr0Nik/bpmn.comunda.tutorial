@@ -1,6 +1,6 @@
-package com.github.electr0nik.camunda.purchaseorder.form;
+package com.github.electr0nik.camunda.purchaseorder.delegate.form;
 
-import com.github.electr0nik.camunda.purchaseorder.model.Meal;
+import com.github.electr0nik.camunda.purchaseorder.delegate.model.Meal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,9 +9,8 @@ import java.util.List;
  * Created by nik on 25.11.15.
  */
 public class MealForm {
-  private List<Meal> mealList;
+  private List<Meal> mealList = new ArrayList<>();
 
-  
 
   public List<Meal> getMealList() {
     return mealList;

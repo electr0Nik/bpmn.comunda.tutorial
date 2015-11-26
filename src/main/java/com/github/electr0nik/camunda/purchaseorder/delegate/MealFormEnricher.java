@@ -1,26 +1,35 @@
 package com.github.electr0nik.camunda.purchaseorder.delegate;
 
+import com.github.electr0nik.camunda.purchaseorder.delegate.form.MealForm;
+import com.github.electr0nik.camunda.purchaseorder.service.HelperService;
+import com.github.electr0nik.camunda.purchaseorder.service.PropertyLoader;
+import com.github.electr0nik.camunda.purchaseorder.service.impl.HelperServiceImpl;
+import com.github.electr0nik.camunda.purchaseorder.service.impl.PropertyLoaderImpl;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.github.electr0nik.camunda.purchaseorder.form.MealForm;
 
 /**
  * Created by nik on 24.11.15.
  */
 public class MealFormEnricher implements JavaDelegate {
 
-  private final static Logger LOGGER = LoggerFactory.getLogger(MealFormEnricher.class);
+  private final Logger LOGGER = LoggerFactory.getLogger(MealFormEnricher.class);
+
+  private final String DEFAULT_PROPERTY_SOURCE = "db/smoke/mock_mealIngredient.properties";
+
+  // @Inject // @Autowired
+  private final PropertyLoader propertyLoader = new PropertyLoaderImpl();
+  private final HelperService helperService = new HelperServiceImpl();
+
 
   @Override
   public void execute(DelegateExecution execution) throws Exception {
     LOGGER.info("Begin enrichment!");
     MealForm mealForm = (MealForm) execution.getVariable("mealForm");
-    mealForm.getMealList().forEach(it -> {
-      LOGGER.info("name: " + it.getName());
-    });
+    mealForm.getMealList().forEach(meal ->
+        meal.setIngredientList(this.helperService.populateMealIngredients(this.propertyLoader.getPopulatedProperties(DEFAULT_PROPERTY_SOURCE), meal.getName())));
     LOGGER.info("end enrichment!");
   }
 }
