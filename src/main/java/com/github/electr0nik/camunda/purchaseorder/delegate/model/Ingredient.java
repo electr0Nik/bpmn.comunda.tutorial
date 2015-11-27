@@ -43,7 +43,7 @@ public class Ingredient {
 
   @Override
   public String toString() {
-    return "Ingredient{" +
+    return "Ingredient{\n\t" +
         "name='" + name + '\'' +
         ", amount='" + amount + '\'' +
         ", priceInCent=" + priceInCent +

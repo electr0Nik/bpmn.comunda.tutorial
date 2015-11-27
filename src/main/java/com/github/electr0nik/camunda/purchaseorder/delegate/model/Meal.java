@@ -26,9 +26,9 @@ public class Meal {
 
   @Override
   public String toString() {
-    return "Meal{" +
+    return "Meal{\n\t" +
         "name='" + name + '\'' +
-        ", ingredientList=" + ingredientList.stream().toString() +
+        ", ingredientList=" + ingredientList +
         '}';
   }
 }

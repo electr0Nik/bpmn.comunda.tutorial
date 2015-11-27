@@ -1,22 +1,20 @@
 package com.github.electr0nik.camunda.purchaseorder.service.impl;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Properties;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.github.electr0nik.camunda.purchaseorder.delegate.form.MealForm;
 import com.github.electr0nik.camunda.purchaseorder.delegate.model.Ingredient;
 import com.github.electr0nik.camunda.purchaseorder.delegate.model.SimpleUser;
 import com.github.electr0nik.camunda.purchaseorder.service.HelperService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Properties;
 
 public class HelperServiceImpl implements HelperService {
   private final Logger LOGGER = LoggerFactory.getLogger(HelperServiceImpl.class);
@@ -75,12 +73,20 @@ public class HelperServiceImpl implements HelperService {
   @Override
   public void persistOrder(final MealForm mealForm, final SimpleUser user) {
     final String fileName = "order" + new Date().getTime() + ".txt";
-    final Path path = Paths.get("C:\\work\\orders\\" + fileName);
+    BufferedWriter output = null;
     try {
-      final BufferedWriter writer = Files.newBufferedWriter(path);
-      writer.write(mealForm.toString() + "\n\n" + user.toString());
+      File file = new File("C:\\work\\orders\\" + fileName);
+      output = new BufferedWriter(new FileWriter(file));
+      output.write(mealForm.toString() + "\n\n" + user.toString());
     } catch (IOException e) {
       e.printStackTrace();
+    } finally {
+      if (output != null)
+        try {
+          output.close();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
     }
 
   }

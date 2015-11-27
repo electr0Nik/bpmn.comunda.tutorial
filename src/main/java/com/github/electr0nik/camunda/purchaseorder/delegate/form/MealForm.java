@@ -17,8 +17,8 @@ public class MealForm {
 
   @Override
   public String toString() {
-    return "MealForm{" +
-        "mealList=" + mealList.stream().toString() +
+    return "MealForm{\n\t" +
+        "mealList=" + mealList +
         '}';
   }
 }

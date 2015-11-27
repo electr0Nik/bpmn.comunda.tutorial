@@ -71,7 +71,7 @@ public class SimpleUser {
 
   @Override
   public String toString() {
-    return "SimpleUser{" + "email='" + email + '\'' + ", firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + ", gender='" + gender
+    return "SimpleUser{\n\t" + "email='" + email + '\'' + ", firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + ", gender='" + gender
         + '\'' + ", address='" + address + '\'' + '}';
   }
 }
