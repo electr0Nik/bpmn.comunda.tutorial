@@ -1,10 +1,5 @@
 package com.github.electr0nik.camunda.purchaseorder.service.impl;
 
-import com.github.electr0nik.camunda.purchaseorder.delegate.form.MealForm;
-import com.github.electr0nik.camunda.purchaseorder.delegate.model.Ingredient;
-import com.github.electr0nik.camunda.purchaseorder.delegate.model.SimpleUser;
-import com.github.electr0nik.camunda.purchaseorder.service.HelperService;
-
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -15,7 +10,16 @@ import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.github.electr0nik.camunda.purchaseorder.delegate.form.MealForm;
+import com.github.electr0nik.camunda.purchaseorder.delegate.model.Ingredient;
+import com.github.electr0nik.camunda.purchaseorder.delegate.model.SimpleUser;
+import com.github.electr0nik.camunda.purchaseorder.service.HelperService;
+
 public class HelperServiceImpl implements HelperService {
+  private final Logger LOGGER = LoggerFactory.getLogger(HelperServiceImpl.class);
   private final String DEFAULT_PROPERTY_MEAL_OBJECT_PREFIX = "object.Meal.";
 
   /**
@@ -63,6 +67,8 @@ public class HelperServiceImpl implements HelperService {
     user.setFirstName("Rambo");
     user.setGender("Male");
     user.setLastName("Matrix");
+    user.setAddress("Musterstr. 12, 12345 Musterstadt");
+    LOGGER.info("User was loaded!" + user);
     return user;
   }
 

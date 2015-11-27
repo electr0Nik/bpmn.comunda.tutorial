@@ -9,8 +9,9 @@ public class SimpleUser {
   private String firstName;
   private String lastName;
 
-  private String gender;
+  private String address;
 
+  private String gender;
 
   public String getUserName() {
     return userName;
@@ -60,13 +61,17 @@ public class SimpleUser {
     this.gender = gender;
   }
 
+  public String getAddress() {
+    return address;
+  }
+
+  public void setAddress(String address) {
+    this.address = address;
+  }
+
   @Override
   public String toString() {
-    return "SimpleUser{" +
-        "email='" + email + '\'' +
-        ", firstName='" + firstName + '\'' +
-        ", lastName='" + lastName + '\'' +
-        ", gender='" + gender + '\'' +
-        '}';
+    return "SimpleUser{" + "email='" + email + '\'' + ", firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + ", gender='" + gender
+        + '\'' + ", address='" + address + '\'' + '}';
   }
 }

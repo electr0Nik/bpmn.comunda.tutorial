@@ -22,6 +22,13 @@
       $scope.simpleUser = camForm.variableManager.variable('simpleUser').value;
     });
 
+    camForm.on('submit', function() {
+      // remove '$$hashKey' properties from ingredient objects
+      angular.forEach(mealForm.mealList, function(meal) {
+        delete meal.$$hashKey;
+      });
+    });
+
   </script>
   <div>
     <h3>Submit Request</h3>
@@ -40,11 +47,13 @@
 
     <h4>Recipient</h4>
     <div>
+      E-Mail: {{simpleUser.email}}<br>
+      Name: {{simpleUser.firstName}} {{simpleUser.lastName}}<br>
+      Address: {{simpleUser.address}}    
     </div>
     
     <div class="form-group">
       <label>Order with costs?</label> <select cam-variable-name="isOrdered" cam-variable-type="Boolean">
-        <option value="-1">please select one!</option>
         <option value="true">Submit</option>
         <option value="false">Nope</option>
       </select>

@@ -152,7 +152,7 @@
     <bpmn2:sequenceFlow id="SequenceFlow_14" name="cancle order" sourceRef="ExclusiveGateway_5" targetRef="ServiceTask_1">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{!isOrdered}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:sequenceFlow id="SequenceFlow_19" name="" sourceRef="ExclusiveGateway_5" targetRef="ServiceTask_6">
+    <bpmn2:sequenceFlow id="SequenceFlow_19" name="order" sourceRef="ExclusiveGateway_5" targetRef="ServiceTask_6">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{isOrdered}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:serviceTask id="UserTask_2" camunda:assignee="john" camunda:class="com.github.electr0nik.camunda.purchaseorder.delegate.SimpleUserEnricher" name="populate User">
@@ -466,7 +466,7 @@
         <di:waypoint xsi:type="dc:Point" x="1862.0" y="437.0"/>
         <di:waypoint xsi:type="dc:Point" x="1862.0" y="464.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="6.0" width="6.0" x="1852.0" y="395.0"/>
+          <dc:Bounds height="22.0" width="35.0" x="1863.0" y="389.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_DataStoreReference_5" bpmnElement="_DataStoreReference_5">
