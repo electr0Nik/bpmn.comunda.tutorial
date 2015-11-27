@@ -22,6 +22,7 @@ public class CheckLoginCounterTask implements JavaDelegate {
     LOGGER.info("Begin ExternalLoginBlackBoxCheckLoginCounter!");
 
     final Long loginCounter = execution.getVariable("loginCounter") != null ? (long) execution.getVariable("loginCounter") : 2;
+    LOGGER.info("counter: " + loginCounter);
 
     execution.setVariable("isLoginSuccess", false);
     execution.setVariable("loginCounter", loginCounter);

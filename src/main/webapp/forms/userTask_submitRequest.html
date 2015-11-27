@@ -23,9 +23,12 @@
     });
 
     camForm.on('submit', function() {
-      // remove '$$hashKey' properties from ingredient objects
-      angular.forEach(mealForm.mealList, function(meal) {
+      // remove '$$hashKey' properties from meal objects
+      angular.forEach($scope.mealForm.mealList, function(meal) {
         delete meal.$$hashKey;
+        angular.forEach(meal.ingredientList, function(ing) {
+          delete ing.$$hashKey;
+        });
       });
     });
 
