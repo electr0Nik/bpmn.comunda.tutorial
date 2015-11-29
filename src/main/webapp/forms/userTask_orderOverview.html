@@ -17,6 +17,16 @@
       $scope.mealForm = camForm.variableManager.variable('mealForm').value;
     });
 
+    camForm.on('submit', function() {
+      // remove '$$hashKey' properties from meal objects
+      angular.forEach($scope.mealForm.mealList, function(meal) {
+        delete meal.$$hashKey;
+        angular.forEach(meal.ingredientList, function(ing) {
+          delete ing.$$hashKey;
+        });
+      });
+    });
+
   </script>
   <div>
     <h3>Order Overview</h3>
