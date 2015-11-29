@@ -5,8 +5,9 @@
     var simpleUser = $scope.simpleUser = {};
 
     camForm.on('form-loaded', function() {
-      // fetch the variable named 'loginCounter'
-      camForm.variableManager.fetchVariable('loginCounter');
+      // create vars for submit
+      // fetch the variable named 'mealForm'
+      camForm.variableManager.fetchVariable('mealForm');
 
       // declare variable 'customerData' incuding metadata for serialization
       camForm.variableManager.createVariable({
@@ -25,7 +26,17 @@
     camForm.on('variables-fetched', function() {
       // after the variables are fetched, bind the value of mealForm to a angular
       // scope value such that the form can work on it
-      $scope.loginCounter = camForm.variableManager.variable('loginCounter').value;
+      $scope.mealForm = camForm.variableManager.variable('mealForm').value;
+    });
+
+    camForm.on('submit', function() {
+      // remove '$$hashKey' properties from meal objects
+      angular.forEach($scope.mealForm.mealList, function(meal) {
+        delete meal.$$hashKey;
+        angular.forEach(meal.ingredientList, function(ing) {
+          delete ing.$$hashKey;
+        });
+      });
     });
   </script>
 

@@ -6,7 +6,7 @@ public class Ingredient {
   private String amount;
   private Long priceInCent;
 
-  private Boolean isAtHome = true;
+  private Boolean isAtHome = false;
 
 
   public String getName() {

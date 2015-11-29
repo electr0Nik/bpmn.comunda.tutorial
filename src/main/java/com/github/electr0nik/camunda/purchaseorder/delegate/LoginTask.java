@@ -37,9 +37,9 @@ public class LoginTask implements JavaDelegate {
       isLoginSuccess = false;
       loginFailCounter = execution.getVariable("loginCounter") != null ? (long) execution.getVariable("loginCounter") : 1L;
     }
+    user.setLoginAttemps(loginFailCounter);
 
     execution.setVariable("isLoginSuccess", isLoginSuccess);
-    execution.setVariable("loginCounter", loginFailCounter);
 
     LOGGER.info("end ExternalLoginBlackBox!");
   }

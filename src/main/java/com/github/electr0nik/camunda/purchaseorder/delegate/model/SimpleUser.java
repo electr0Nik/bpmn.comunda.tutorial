@@ -13,6 +13,8 @@ public class SimpleUser {
 
   private String gender;
 
+  private Long loginAttemps = 0L;
+
   public String getUserName() {
     return userName;
   }
@@ -69,9 +71,17 @@ public class SimpleUser {
     this.address = address;
   }
 
+  public Long getLoginAttemps() {
+    return loginAttemps;
+  }
+
+  public void setLoginAttemps(Long loginAttemps) {
+    this.loginAttemps = loginAttemps;
+  }
+
   @Override
   public String toString() {
-    return "SimpleUser{\n\t" + "email='" + email + '\'' + ", firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + ", gender='" + gender
-        + '\'' + ", address='" + address + '\'' + '}';
+    return "SimpleUser{\n\t" + "email='" + email + '\'' + ", firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + ", gender='"
+        + gender + '\'' + ", address='" + address + '\'' + '}';
   }
 }
