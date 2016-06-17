@@ -1,17 +1,44 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.electr0nik</groupId>
   <artifactId>camunda.tutorial.extended</artifactId>
-  <version>1.0.4-SNAPSHOT</version>
+  <version>1.0.5-SNAPSHOT</version>
   <packaging>war</packaging>
-  <description>Extended Tutorial Projekt for Comunda</description>
+  <description>Example - Online Purchase Process</description>
+
+  <issueManagement>
+    <url>https://github.com/electr0Nik/bpmn.comunda.tutorial/issues</url>
+    <system>GitHub Issues</system>
+  </issueManagement>
+
+  <scm>
+    <url>https://github.com/electr0Nik/bpmn.comunda.tutorial</url>
+    <connection>scm:git:git://github.com/electr0Nik/bpmn.comunda.tutorial.git</connection>
+    <developerConnection>scm:git:electr0nik@github.com/electr0Nik/bpmn.comunda.tutorial.git</developerConnection>
+  </scm>
+
+  <developers>
+    <developer>
+      <id>kolytsch</id>
+      <name>Nikita Kolytschew</name>
+      <url>https://github.com/electr0Nik/bpmn.comunda.tutorial</url>
+    </developer>
+    <developer>
+      <name>Florian Hofstaedter</name>
+    </developer>
+    <developer>
+      <name>Jonas Pfeifer</name>
+    </developer>
+  </developers>
 
   <properties>
     <final.name>camunda-extended</final.name>
     <camunda.version>7.3.0</camunda.version>
     <java.version>1.8</java.version>
     <junit.version>4.12</junit.version>
+    <logback.version>1.1.3</logback.version>
+    <slf4j.version>1.7.12</slf4j.version>
   </properties>
 
   <dependencyManagement>
@@ -23,6 +50,33 @@
         <scope>import</scope>
         <type>pom</type>
       </dependency>
+
+      <!-- custom  -->
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>jcl-over-slf4j</artifactId>
+        <version>${slf4j.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>${slf4j.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>jul-to-slf4j</artifactId>
+        <version>${slf4j.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>${logback.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-core</artifactId>
+        <version>${logback.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -32,6 +86,22 @@
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>${junit.version}</version>
+    </dependency>
+
+    <!-- logging -->
+    <!-- logging framework -->
+    <!-- use logback instead jul/apache.logger/log4j -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>jcl-over-slf4j</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>jul-to-slf4j</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
     </dependency>
 
     <!-- provided by tomcat -->
@@ -51,7 +121,7 @@
 
   <build>
     <plugins>
-      <!-- compiler plugin - opverride parent java-version -->
+      <!-- compiler plugin - override parent java-version -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -62,15 +132,96 @@
         </configuration>
       </plugin>
 
+      <!-- war plugin - build wars -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
         <version>2.6</version>
         <configuration>
           <failOnMissingWebXml>false</failOnMissingWebXml>
+          <!--<outputDirectory>/home/Schreibtisch/dev/tools/server/camunda-bpm-tomcat-7.3.0/server/apache-tomcat-7.0.62/webapps/</outputDirectory>-->
         </configuration>
       </plugin>
-
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <id>dev_nik_unix</id>
+      <build>
+        <plugins>
+          <!-- copy war on 'install' phase-->
+          <plugin>
+            <artifactId>maven-resources-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>copy-resource-one</id>
+                <phase>install</phase>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <configuration>
+                  <!-- override existing war -->
+                  <overwrite>true</overwrite>
+                  <!-- set output folder -->
+                  <outputDirectory>/home/nik/Schreibtisch/dev/tools/server/camunda-bpm-tomcat-7.3.0/server/apache-tomcat-7.0.62/webapps/
+                  </outputDirectory>
+                  <!-- define what should be copied -->
+                  <resources>
+                    <resource>
+                      <directory>${basedir}/target/</directory>
+                      <includes>
+                        <include>*.war</include>
+                      </includes>
+                    </resource>
+                  </resources>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>do_not_copy_war</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+    </profile>
+    <profile>
+      <id>dev_jo_vm_windows</id>
+      <build>
+        <plugins>
+          <!-- copy war on 'install' phase-->
+          <plugin>
+            <artifactId>maven-resources-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>copy-resource-one</id>
+                <phase>install</phase>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <configuration>
+                  <!-- override existing war -->
+                  <overwrite>true</overwrite>
+                  <!-- set output folder -->
+                  <outputDirectory>C:\Users\ADMIN\camunda-bpm-tomcat-7.3.0\server\apache-tomcat-7.0.62\webapps\</outputDirectory>
+                  <!-- define what should be copied -->
+                  <resources>
+                    <resource>
+                      <directory>${basedir}/target/</directory>
+                      <includes>
+                        <include>*.war</include>
+                      </includes>
+                    </resource>
+                  </resources>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+
   <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
     <resetJUL>true</resetJUL>
   </contextListener>
+
+  <!-- To enable JMX Management -->
+  <jmxConfigurator/>
 
   <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>
@@ -10,7 +14,7 @@
     </encoder>
   </appender>
 
-  <logger name="com.github" level="TRACE"/>
+  <logger name="com.github" level="warn"/>
 
   <root level="debug">
     <appender-ref ref="console"/>
